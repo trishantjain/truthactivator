@@ -9,6 +9,22 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const News = (props) => {
 
+  const [ch, setCh] = useState('light')
+
+    const togglech = () => {
+
+        if (ch=== 'light') {
+            setCh('dark');
+            document.body.style.backgroundColor = 'white';
+
+        }
+        else {
+            setCh('light');
+            document.body.style.backgroundColor = 'black';
+        }
+    }
+  
+
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -42,7 +58,7 @@ const News = (props) => {
   // }
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=67870b7b6e064f6fb36cb5dcff691fa6&page=${page+1}&pageSize=${props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=67870b7b6e064f6fb36cb5dcff691fa6&page=${page + 1}&pageSize=${props.pageSize}`;
     setPage(page + 1)
 
     let data = await fetch(url);
@@ -54,8 +70,8 @@ const News = (props) => {
 
 
   return (
-    <div className="container">
-      <h2 className="text-center my-5">Truth Activator</h2>
+    <div className={`container `}>
+      <h2 className={`text-center my-5 text-${props.mode === 'light' ? 'dark' : 'light'}`}>Truth Activator</h2>
       {loading && <Spinner />}
       <InfiniteScroll
         dataLength={articles.length}
@@ -67,7 +83,7 @@ const News = (props) => {
           <div className="row">
             {articles.map((element) => {
               return <div className="col-md-3" key={element.url}>
-                <Newsitem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imgurl={element.urlToImage} newsurl={element.url} author={element.author} date={element.publishedAt} />
+                <Newsitem mode={props.mode} title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imgurl={element.urlToImage} newsurl={element.url} author={element.author} date={element.publishedAt} />
               </div>
             })}
           </div>

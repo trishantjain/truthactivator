@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Newsitem = (props) => {
 
+    
+
+
     let { title, description, imgurl, newsurl, author, date } = props;
     return (
-        <div>
-            <div className="card">
+        <div className={`my-3 `}>
+            <div className={`card text-${props.mode === 'light' ? 'dark' : 'light'} bg-${props.mode === 'light' ? 'light' : 'dark'}`}>
                 <img src={!imgurl ? "https://sportshub.cbsistatic.com/i/r/2022/10/06/adac45fc-f7a5-4932-8337-41176be78fa1/thumbnail/1200x675/b874f43e8e114c7cc862a333a9de8e78/mlb-bracket-2022-1.png0" : imgurl} className="card-img-top" alt="." />
                 <div className="card-body">
                     <h5 className="card-title">{title}...</h5>
