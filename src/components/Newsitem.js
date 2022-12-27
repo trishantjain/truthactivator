@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 
 const Newsitem = (props) => {
 
-    
-
-
     let { title, description, imgurl, newsurl, author, date } = props;
     return (
         <div className={`my-3 `}>
