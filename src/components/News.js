@@ -11,6 +11,7 @@ const News = (props) => {
 
   const [ch, setCh] = useState('light')
 
+    // eslint-disable-next-line
     const togglech = () => {
 
         if (ch=== 'light') {
